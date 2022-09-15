@@ -9,8 +9,9 @@ int main()
     char ch = ' ';
     int x = 0, y = 20;
     draw_ship(x, y);
-    for(int i=0; i<76; i++){
-        erase_ship(x ,y);
+    for (int i = 0; i < 76; i++)
+    {
+        erase_ship(x, y);
         draw_ship(++x, y);
         Sleep(50);
     }
@@ -21,7 +22,7 @@ int main()
             ch = _getch();
             if (ch == 'a' && x != 0)
             {
-                erase_ship(x ,y);
+                erase_ship(x, y);
                 draw_ship(--x, y);
             }
             if (ch == 'd' && x != 76)
