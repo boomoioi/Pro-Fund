@@ -37,7 +37,7 @@ int main()
                 moveLeft = 0;
                 moveRight = 0;
             }
-            if (ch == ' ' && bullet != 0)
+            if (ch == ' ' && bullet != 0 && shoot == 0)
             {
                 shoot = 1;
                 sy = y - 1;
