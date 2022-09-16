@@ -10,7 +10,7 @@ void setcolor(int, int);
 
 int main()
 {
-    char ch = ' ';
+    char ch = '';
     setcursor(0);
     setcolor(2, 4);
     int x = 40, y = 20;
