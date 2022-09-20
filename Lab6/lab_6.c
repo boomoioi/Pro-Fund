@@ -10,9 +10,10 @@ void setcolor(int, int);
 
 int main()
 {
-    char ch = '';
+    char ch = ' ';
     setcursor(0);
     setcolor(2, 4);
+    int bulletArray[5][3] = { {-1, -1, 0}, {-1, -1, 0}, {-1, -1, 0}, {-1, -1, 0}, {-1, -1, 0} }, b = 0;
     int x = 40, y = 20;
     int shoot = 0, bullet = 5, sx, sy;
     int moveLeft = 0, moveRight = 0;
@@ -37,13 +38,16 @@ int main()
                 moveLeft = 0;
                 moveRight = 0;
             }
-            if (ch == ' ' && bullet != 0 && shoot == 0)
+            if (ch == ' ' && bullet > 0)
             {
-                shoot = 1;
-                sy = y - 1;
-                sx = x + 2;
+                bulletArray[b][0] = x + 2;
+                bulletArray[b][1] = y - 1;
+                bulletArray[b][2] = 1;
+                draw_bullet(bulletArray[b][0], bulletArray[b][1]);
+                b++;
+                b = b % 5;
                 bullet--;
-                draw_bullet(sx, sy);
+                
             }
 
             fflush(stdin);
@@ -62,18 +66,22 @@ int main()
             setcolor(2, 4);
             draw_ship(++x, y);
         }
-        if (shoot == 1)
+        for (int i = 0; i < 5; i++)
         {
-            setcolor(0, 0);
-            erase_bullet(sx, sy);
-            if (sy == 0)
+            if (bulletArray[i][2] == 1)
             {
-                shoot = 0;
-            }
-            else
-            {
-                setcolor(7, 0);
-                draw_bullet(sx, --sy);
+                setcolor(0, 0);
+                erase_bullet(bulletArray[i][0], bulletArray[i][1]);
+                if (bulletArray[i][1] == 0)
+                {
+                    bulletArray[i][2] = 0;
+                    bullet++;
+                }
+                else
+                {
+                    setcolor(7, 0);
+                    draw_bullet(bulletArray[i][0], --bulletArray[i][1]);
+                }
             }
         }
         Sleep(50);
@@ -83,7 +91,7 @@ int main()
 
 void draw_ship(int x, int y)
 {
-    COORD c = {x, y};
+    COORD c = { x, y };
     SetConsoleCursorPosition(
         GetStdHandle(STD_OUTPUT_HANDLE), c);
     printf("<-0->");
@@ -91,7 +99,7 @@ void draw_ship(int x, int y)
 
 void draw_bullet(int x, int y)
 {
-    COORD c = {x, y};
+    COORD c = { x, y };
     SetConsoleCursorPosition(
         GetStdHandle(STD_OUTPUT_HANDLE), c);
     printf(".");
@@ -99,7 +107,7 @@ void draw_bullet(int x, int y)
 
 void erase_ship(int x, int y)
 {
-    COORD c = {x, y};
+    COORD c = { x, y };
     SetConsoleCursorPosition(
         GetStdHandle(STD_OUTPUT_HANDLE), c);
     printf("     ");
@@ -107,7 +115,7 @@ void erase_ship(int x, int y)
 
 void erase_bullet(int x, int y)
 {
-    COORD c = {x, y};
+    COORD c = { x, y };
     SetConsoleCursorPosition(
         GetStdHandle(STD_OUTPUT_HANDLE), c);
     printf(" ");

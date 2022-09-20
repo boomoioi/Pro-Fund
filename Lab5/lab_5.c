@@ -9,7 +9,7 @@ int main()
     char ch = ' ';
     int x = 0, y = 20;
     draw_ship(x, y);
-    for (int i = 0; i < 76; i++)
+    for (int i = 0; i < 75; i++)
     {
         erase_ship(x, y);
         draw_ship(++x, y);
@@ -25,7 +25,7 @@ int main()
                 erase_ship(x, y);
                 draw_ship(--x, y);
             }
-            if (ch == 'd' && x != 76)
+            if (ch == 'd' && x != 75)
             {
                 erase_ship(x, y);
                 draw_ship(++x, y);
