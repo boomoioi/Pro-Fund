@@ -67,7 +67,6 @@ int main()
         {
             if (bulletArray[i][2] == 1)
             {
-                setcolor(0, 0);
                 erase_bullet(bulletArray[i][0], bulletArray[i][1]);
                 if (bulletArray[i][1] == 0)
                 {
@@ -76,7 +75,6 @@ int main()
                 }
                 else
                 {
-                    setcolor(7, 0);
                     draw_bullet(bulletArray[i][0], --bulletArray[i][1]);
                 }
             }
@@ -101,6 +99,7 @@ void draw_ship(int x, int y)
 void draw_bullet(int x, int y)
 {
     gotoxy(x, y);
+    setcolor(7, 0);
     printf(".");
 }
 
