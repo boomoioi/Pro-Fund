@@ -7,6 +7,7 @@ void erase_bullet(int, int);
 void erase_ship(int, int);
 void setcursor(boolean);
 void setcolor(int, int);
+void gotoxy(int, int);
 
 int main()
 {
@@ -15,7 +16,7 @@ int main()
     setcolor(2, 4);
     int bulletArray[5][3] = { {-1, -1, 0}, {-1, -1, 0}, {-1, -1, 0}, {-1, -1, 0}, {-1, -1, 0} }, b = 0;
     int x = 40, y = 20;
-    int shoot = 0, bullet = 5, sx, sy;
+    int bullet = 5;
     int moveLeft = 0, moveRight = 0;
     draw_ship(x, y);
     do
@@ -54,16 +55,12 @@ int main()
         }
         if (moveLeft == 1 && x != 0)
         {
-            setcolor(0, 0);
             erase_ship(x, y);
-            setcolor(2, 4);
             draw_ship(--x, y);
         }
         if (moveRight == 1 && x != 76)
         {
-            setcolor(0, 0);
             erase_ship(x, y);
-            setcolor(2, 4);
             draw_ship(++x, y);
         }
         for (int i = 0; i < 5; i++)
@@ -89,35 +86,35 @@ int main()
     return 0;
 }
 
-void draw_ship(int x, int y)
-{
+void gotoxy(int x, int y) {
     COORD c = { x, y };
     SetConsoleCursorPosition(
         GetStdHandle(STD_OUTPUT_HANDLE), c);
+}
+void draw_ship(int x, int y)
+{
+    gotoxy(x, y);
+    setcolor(2, 4);
     printf("<-0->");
 }
 
 void draw_bullet(int x, int y)
 {
-    COORD c = { x, y };
-    SetConsoleCursorPosition(
-        GetStdHandle(STD_OUTPUT_HANDLE), c);
+    gotoxy(x, y);
     printf(".");
 }
 
 void erase_ship(int x, int y)
 {
-    COORD c = { x, y };
-    SetConsoleCursorPosition(
-        GetStdHandle(STD_OUTPUT_HANDLE), c);
+    gotoxy(x, y);
+    setcolor(0, 0);
     printf("     ");
 }
 
 void erase_bullet(int x, int y)
 {
-    COORD c = { x, y };
-    SetConsoleCursorPosition(
-        GetStdHandle(STD_OUTPUT_HANDLE), c);
+    gotoxy(x, y);
+    setcolor(0, 0);
     printf(" ");
 }
 
