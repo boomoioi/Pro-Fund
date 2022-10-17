@@ -92,15 +92,15 @@ void fill_life(int life) {
 
 void draw_ship(int x, int y) {
     for (int i = 0; i < 5; i++) {
-        consoleBuffer[x + screen_x * y + i].Char.AsciiChar = ship[i];
-        consoleBuffer[x + screen_x * y + i].Attributes = color;
+        consoleBuffer[x - 2 + screen_x * y + i].Char.AsciiChar = ship[i];
+        consoleBuffer[x - 2 + screen_x * y + i].Attributes = color;
     }
  
 }
 
 void check_colission(int x, int y) {
     for (int i = 0; i < scount; i++) {
-        if (star[i].Y == y && star[i].X >= x && star[i].X <= x+4) {
+        if (star[i].Y == y && star[i].X >= x-2 && star[i].X <= x+2) {
             star[i].X = (rand() % 80);
             star[i].Y = 0;
             life -= 1;
@@ -159,8 +159,8 @@ int main()
         clear_buffer();
         star_fall();
         check_colission(posx, posy);
-        draw_ship(posx, posy);
         fill_star_to_buffer();
+        draw_ship(posx, posy);
         fill_life(life);
         fill_buffer_to_console();
         if (life <= 0) {
